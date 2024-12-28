@@ -3,6 +3,7 @@ import requests
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QLabel, QScrollArea, QGridLayout
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
+from api import get_wallpapers
 
 class WallpaperSearcher(QMainWindow):
     def __init__(self):
@@ -45,8 +46,8 @@ class WallpaperSearcher(QMainWindow):
             self.wallpaper_layout.itemAt(i).widget().setParent(None)
 
         # Fetch wallpapers (placeholder API call)
-        wallpapers = self.fetch_wallpapers(search_term)
-
+        wallpapers = get_wallpapers(search_term)
+    
         # Display wallpapers
         for i, wallpaper_url in enumerate(wallpapers):
             label = QLabel()
@@ -57,14 +58,14 @@ class WallpaperSearcher(QMainWindow):
             row, col = divmod(i, 3)
             self.wallpaper_layout.addWidget(label, row, col)
 
-    def fetch_wallpapers(self, search_term):
-        # This is a placeholder. In a real application, you would call an actual API here.
-        # For demonstration, we'll return some placeholder image URLs
-        return [
-            "https://via.placeholder.com/400x400.png?text=Wallpaper+1",
-            "https://w.wallhaven.cc/full/9d/wallhaven-9dqojx.jpg",
-            "https://w.wallhaven.cc/full/vq/wallhaven-vq898p.png",
-        ]
+    # def fetch_wallpapers(self, search_term):
+    #     # This is a placeholder. In a real application, you would call an actual API here.
+    #     # For demonstration, we'll return some placeholder image URLs
+    #     return [
+    #         "https://via.placeholder.com/400x400.png?text=Wallpaper+1",
+    #         "https://w.wallhaven.cc/full/9d/wallhaven-9dqojx.jpg",
+    #         "https://w.wallhaven.cc/full/vq/wallhaven-vq898p.png",
+    #     ]
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
